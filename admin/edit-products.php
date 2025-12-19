@@ -2,7 +2,7 @@
 <?php include('functions/adminFunctions.php') ?>
 <?php include('template/header.php') ?>
 <?php include('template/sidebar.php') ?>
-
+    
 
 <main class=" p-8 md:pt-8 pt-24 flex-1 ">
 
