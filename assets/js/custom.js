@@ -94,7 +94,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (response) {
-                if (response.status == 201) {
+                if (response.status == 200) {
                     showToast(response.message);
                     $('#mycart').load(location.href + " #mycart")
                 } else {

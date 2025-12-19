@@ -12,15 +12,15 @@ if (isset($_POST['add_category_btn'])) {
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
     $meta_keywords = $_POST['meta_keywords'];
-    $status = isset($_POST['status']) ? '1':'0';
-    $popular = isset($_POST['popularitas']) ? '1':'0';
+    $status = isset($_POST['status']) ? '1' : '0';
+    $popular = isset($_POST['popularitas']) ? '1' : '0';
 
     $image = $_FILES['gambar']['name'];
 
     $path = "../uploads/";
 
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
-    $filename = time().'.'.$image_ext;
+    $filename = time() . '.' . $image_ext;
 
     $category_query = "INSERT INTO tb_kategori
     (nama_kategori,slug,deskripsi,meta_title,meta_description,meta_keywords,status,popularitas,gambar)
@@ -31,18 +31,13 @@ if (isset($_POST['add_category_btn'])) {
 
     if ($category_query_run) {
 
-        move_uploaded_file($_FILES['gambar']['tmp_name'], $path.$filename);
+        move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $filename);
 
         redirect("category.php", "Category Added Successfully");
-
     } else {
         redirect("add-category.php", "Something went wrong");
-
     }
-
-}
-
-else if (isset($_POST['update_category_btn'])) {
+} else if (isset($_POST['update_category_btn'])) {
 
     $category_id = $_POST['category_id'];
     $name = $_POST['nama_kategori'];
@@ -51,8 +46,8 @@ else if (isset($_POST['update_category_btn'])) {
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
     $meta_keywords = $_POST['meta_keywords'];
-    $status = isset($_POST['status']) ? '1':'0';
-    $popular = isset($_POST['popularitas']) ? '1':'0';
+    $status = isset($_POST['status']) ? '1' : '0';
+    $popular = isset($_POST['popularitas']) ? '1' : '0';
 
 
     $new_image = $_FILES['gambar']['name'];
@@ -64,7 +59,7 @@ else if (isset($_POST['update_category_btn'])) {
     if ($new_image != "") {
         // $update_filename = $new_image;
         $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
-        $update_filename = time().'.'.$image_ext;
+        $update_filename = time() . '.' . $image_ext;
     } else {
         $update_filename = $old_image;
     }
@@ -75,9 +70,9 @@ else if (isset($_POST['update_category_btn'])) {
 
     if ($update_query_run) {
         if ($_FILES['gambar']['name'] != "") {
-            move_uploaded_file($_FILES['gambar']['tmp_name'], $path.$update_filename);
-            if (file_exists("../uploads/".$old_image)) {
-                unlink("../uploads/".$old_image);
+            move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $update_filename);
+            if (file_exists("../uploads/" . $old_image)) {
+                unlink("../uploads/" . $old_image);
             }
         }
         // redirect("edit-category.php?id=$category_id", "Category Updated Successfully");
@@ -85,10 +80,7 @@ else if (isset($_POST['update_category_btn'])) {
     } else {
         redirect("edit-category.php?id=$category_id", "Something went wrong, try again");
     }
-
-} 
-
-else if (isset($_POST['delete_category_btn'])) {
+} else if (isset($_POST['delete_category_btn'])) {
 
     $category_id = mysqli_real_escape_string($con, $_POST['category_id']);
 
@@ -102,18 +94,15 @@ else if (isset($_POST['delete_category_btn'])) {
 
     if ($delete_query_run) {
 
-        if (file_exists("../uploads/".$image)) {
-            unlink("../uploads/".$image);
+        if (file_exists("../uploads/" . $image)) {
+            unlink("../uploads/" . $image);
         }
 
         redirect("category.php", "Category deleted successfully");
     } else {
         redirect("category.php", "Something went wrong");
-
     }
-}
-
-else if (isset($_POST['add_product_btn'])) {
+} else if (isset($_POST['add_product_btn'])) {
 
     $category_id = $_POST['id_kategori'];
 
@@ -127,13 +116,13 @@ else if (isset($_POST['add_product_btn'])) {
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
     $meta_keywords = $_POST['meta_keywords'];
-    $status = isset($_POST['status']) ? '1':'0';
-    $popular = isset($_POST['popularitas']) ? '1':'0';
+    $status = isset($_POST['status']) ? '1' : '0';
+    $popular = isset($_POST['popularitas']) ? '1' : '0';
 
     $image = $_FILES['gambar']['name'];
     $path = "../uploads/";
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
-    $filename = time().'.'.$image_ext;
+    $filename = time() . '.' . $image_ext;
 
     $product_query = "INSERT INTO tb_produk (id_kategori,nama_produk,slug,headline,deskripsi,harga_asli,harga_jual,qty,meta_title,meta_description,meta_keywords,status,popularitas,gambar) VALUES ('$category_id', '$name', '$slug', '$headline', '$description', '$original_price', '$selling_price', '$qty', '$meta_title', '$meta_description', '$meta_keywords', '$status', '$popular', '$filename')";
 
@@ -141,17 +130,13 @@ else if (isset($_POST['add_product_btn'])) {
 
     if ($product_query_run) {
 
-        move_uploaded_file($_FILES['gambar']['tmp_name'], $path.$filename);
+        move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $filename);
 
         redirect("add-product.php", "Product Added Successfully");
-
     } else {
         redirect("add-product.php", "Something went wrong");
-
     }
-}
-
-else if (isset($_POST['update_product_btn'])) {
+} else if (isset($_POST['update_product_btn'])) {
     $category_id = $_POST['id_kategori'];
     $product_id = $_POST['id_produk'];
 
@@ -165,8 +150,8 @@ else if (isset($_POST['update_product_btn'])) {
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
     $meta_keywords = $_POST['meta_keywords'];
-    $status = isset($_POST['status']) ? '1':'0';
-    $popular = isset($_POST['popularitas']) ? '1':'0';
+    $status = isset($_POST['status']) ? '1' : '0';
+    $popular = isset($_POST['popularitas']) ? '1' : '0';
 
     // $image = $_FILES['gambar']['name'];
     $path = "../uploads/";
@@ -178,7 +163,7 @@ else if (isset($_POST['update_product_btn'])) {
     if ($new_image != "") {
         // $update_filename = $new_image;
         $image_ext = pathinfo($new_image, PATHINFO_EXTENSION);
-        $update_filename = time().'.'.$image_ext;
+        $update_filename = time() . '.' . $image_ext;
     } else {
         $update_filename = $old_image;
     }
@@ -189,9 +174,9 @@ else if (isset($_POST['update_product_btn'])) {
 
     if ($update_product_query_run) {
         if ($_FILES['gambar']['name'] != "") {
-            move_uploaded_file($_FILES['gambar']['tmp_name'], $path.$update_filename);
-            if (file_exists("../uploads/".$old_image)) {
-                unlink("../uploads/".$old_image);
+            move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $update_filename);
+            if (file_exists("../uploads/" . $old_image)) {
+                unlink("../uploads/" . $old_image);
             }
         }
 
@@ -199,9 +184,7 @@ else if (isset($_POST['update_product_btn'])) {
     } else {
         redirect("edit-products.php?id=$product_id", "Something went wrong, try again");
     }
-}
-
-else if (isset($_POST['delete_products_btn'])) {
+} else if (isset($_POST['delete_products_btn'])) {
 
     $product_id = mysqli_real_escape_string($con, $_POST['id_produk']);
 
@@ -215,26 +198,33 @@ else if (isset($_POST['delete_products_btn'])) {
 
     if ($delete_query_run) {
 
-        if (file_exists("../uploads/".$image)) {
-            unlink("../uploads/".$image);
+        if (file_exists("../uploads/" . $image)) {
+            unlink("../uploads/" . $image);
         }
 
         redirect("products.php", "Product deleted successfully");
     } else {
         redirect("products.php", "Something went wrong");
-
     }
-}
-
-elseif (isset($_POST['update_status_btn'])) {
+} elseif (isset($_POST['update_status_btn'])) {
     $track_no = $_POST['no_tracking'];
     $order_status = $_POST['order_status'];
+
+    $order_query = "SELECT * FROM tb_orders WHERE no_tracking='$track_no'";
+    $order_query_run = mysqli_query($con, $order_query);
+    $order_data = mysqli_fetch_array($order_query_run);
 
     $updateOrder_query = "UPDATE tb_orders SET status='$order_status' WHERE no_tracking='$track_no'";
     $updateOrder_query_exec = mysqli_query($con, $updateOrder_query);
 
-    redirect("order-details.php?t=$track_no" , "Status updated succesfully");
+    $orderid = $order_data['id_order'];
+    $logsts = $order_data['status'];
+    $logadmin = $_SESSION['auth_user']['id_user'];
+    $keterangan = $_SESSION['auth_user']['nama_user'] . " mengubah status orderan dari " . $logsts . " menjadi " . $order_status;
+    $insertLog = "INSERT INTO tb_orders_log (order_id,log_sts,log_admin,keterangan) VALUES ('$orderid','$logsts','$logadmin','$keterangan')";
+    $log_query_run = mysqli_query($con, $insertLog);
+
+    redirect("order-details.php?t=$track_no", "Status updated succesfully");
 } else {
     // redirect()
 }
-?>
