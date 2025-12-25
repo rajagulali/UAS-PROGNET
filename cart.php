@@ -134,7 +134,7 @@ foreach ($items as $citem) {
 
         <?php else: ?>
 
-        <div class="min-h-[80vh] flex items-center justify-center text-slate-400">
+        <div class="mt-10 flex items-center justify-center text-slate-400">
             <h1 class="text-2xl sm:text-4xl font-semibold">Your cart is empty</h1>
         </div>
 
